@@ -1,0 +1,28 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+}
+
+html, body
+{
+    height: 100%;
+}
+
+body, div, a, p, ul, ol, li, table, td, th,
+{
+    font-family: Tahoma;
+    font-weight: normal;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+    font-family: Arial;
+}
+
+.clear
+{
+    clear: both;
+}
