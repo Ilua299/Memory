@@ -63,44 +63,59 @@ var CardF = function(x0,y0,i)
     this.width = 190;
     this.height = 280;
     this.state = CARD_CLOSED_STATE;
-    this.onClick = function(this.x,this,y,this,this.width,this.height,this.state)
+    function onClick()
     {
-        if (this.state == CARD_OPENED_STATE)
-        {
-          context.drawImage(img, cards[i].x, cards[i].y, this.width, this.height, this.x, this.y, this.width, this.height); 
-        }
-        else
-        {
-          context.drawImage(img, 390, 1120, this.width, this.height, this.x, this.y, this.width, this.height);
-        }        
+		img.onload()
+		{
+			if (this.state == CARD_OPENED_STATE)
+			{
+				context.drawImage(img, cards[i].x, cards[i].y, this.width, this.height, this.x, this.y, this.width, this.height); 
+			}
+			else
+			{
+				context.drawImage(img, 390, 1120, this.width, this.height, this.x, this.y, this.width, this.height);
+			}
+		}        
     }
 }  
 
 
-    var Cardss = [];
+var Cardss = [];
 
-    for (var i = 0; i < 8; i++)
-    {
-        var card1 = CardF(randomCardPlaces[i].x, randomCardPlaces[i].y, i);
-		
-        var card2 = new CardF(randomCardPlaces[15 - i].x, randomCardPlaces[15 - i].y, i);
-		
-        Cardss.push(card1);
-        Cardss.push(card2);        
-    };
+for (var i = 0; i < 8; i++)
+{
+    var card1 = CardF(randomCardPlaces[i].x, randomCardPlaces[i].y, i);
+    card1.onClick();
+    var card2 = new CardF(randomCardPlaces[15 - i].x, randomCardPlaces[15 - i].y, i);
+	card2.onClick();
+    Cardss.push(card1);
+    Cardss.push(card2);        
+};
 	
-	
-canvas.onclick = function() {
+canvas.onclick = function() 
+{
 	var mouseX =  event.pageX - canvas.offsetLeft;
 	var mouseY =  event.pageY - canvas.offsetTop;
 	console.log(mouseX);
 	console.log(mouseY);
 	Number++;
-	for (var i = 0; i < 16;i++){
+	for (var i = 0; i < 16;i++)
+	{
 	    if ((mouseX > Cardss[i].x) && (mouseX < (Cardss[i].x + 190)) && (mouseY > Cardss[i].y) && (mouseY < (Cardss[i].y + 280)))
-		{
+        {
 			Cardss[i].state = CARD_OPENED_STATE;
+			Cardss[i].onclick();
+			this.NumberOfClicks++;
 		}
+	}
+	if (this.NumberOfClicks == 2)
+	{
+		for (var i = 0; i < 16;i++)
+		{
+			Cardss[i].state = CARD_CLOSED_STATE;
+			Cardss[i].onclick();
+		}
+		this.NumberOfClicks = 0;
 	}
 }
 
