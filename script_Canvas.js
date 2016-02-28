@@ -65,17 +65,17 @@ var CardF = function(x0,y0,i)
     this.state = CARD_CLOSED_STATE;
     function onClick()
     {
-		img.onload()
+	  img.onload()
+	  {
+		if (this.state == CARD_OPENED_STATE)
 		{
-			if (this.state == CARD_OPENED_STATE)
-			{
-				context.drawImage(img, cards[i].x, cards[i].y, this.width, this.height, this.x, this.y, this.width, this.height); 
-			}
-			else
-			{
-				context.drawImage(img, 390, 1120, this.width, this.height, this.x, this.y, this.width, this.height);
-			}
-		}        
+			context.drawImage(img, cards[i].x, cards[i].y, this.width, this.height, this.x, this.y, this.width, this.height); 
+		}
+		else
+		{
+			context.drawImage(img, 390, 1120, this.width, this.height, this.x, this.y, this.width, this.height);
+		}
+	  }        
     }
 }  
 
@@ -102,20 +102,20 @@ canvas.onclick = function()
 	for (var i = 0; i < 16;i++)
 	{
 	    if ((mouseX > Cardss[i].x) && (mouseX < (Cardss[i].x + 190)) && (mouseY > Cardss[i].y) && (mouseY < (Cardss[i].y + 280)))
-        {
-			Cardss[i].state = CARD_OPENED_STATE;
-			Cardss[i].onclick();
-			this.NumberOfClicks++;
-		}
+	    {
+		Cardss[i].state = CARD_OPENED_STATE;
+		Cardss[i].onclick();
+		this.NumberOfClicks++
+	    }
 	}
 	if (this.NumberOfClicks == 2)
 	{
-		for (var i = 0; i < 16;i++)
-		{
-			Cardss[i].state = CARD_CLOSED_STATE;
-			Cardss[i].onclick();
-		}
-		this.NumberOfClicks = 0;
+            for (var i = 0; i < 16;i++)
+	    {
+	        Cardss[i].state = CARD_CLOSED_STATE;
+	        Cardss[i].onclick();
+	    }
+	    this.NumberOfClicks = 0;
 	}
 }
 
